@@ -1,19 +1,9 @@
 
 library(Matrix) 
 
-kk<-read.csv("file:///D:/Qinhughua HP D drive+desk/desk/recovery time in Horizontal_vertical diversity shape food web stability/kk.csv")
-kk[1,1]
-kk[2,1]
-kk[3,1]
-hist(kk) # check uniform distribution
-
-
-
-## simulation 2
-
-muu <- c(1,1,1,1,1,1,-0.001,-0.001,-0.001)
+## simulation 1
 law <- function(alpha, N=1, omni.i=NA, omni.j=NA, omega=NULL){
-  
+  muu <- c(1,1,1,1,1,1,-0.001,-0.001,-0.001)
   a<-NULL
   b<-NULL
   out.a <- NULL
@@ -197,24 +187,35 @@ law <- function(alpha, N=1, omni.i=NA, omni.j=NA, omega=NULL){
   return(as.data.frame(out))
 }
 
+kk<-read.csv("kk.csv")  
+hist(kk[,1]) # check uniform distribution
 
-
-alpha <- scan('6_3.txt')
-alpha <- matrix(alpha[1:81], ncol = 9, byrow = TRUE)
+zeromatirx <- matrix(0, nrow=9, ncol=9)
+matrixfrom<-function (zeromatirx) {
+  zeromatirx[1:6,1:6] <- -0.5
+  zeromatirx[1,7] <- -0.1
+  zeromatirx[2,7] <- (-0.5+0.1)
+  zeromatirx[2,8] <- (-0.5+0.1)
+  zeromatirx[3,8] <- -0.1
+  zeromatirx[2,9] <- (-0.5+0.1)
+  zeromatirx[4,9] <- (-0.1/3)
+  zeromatirx[5,9] <- (-0.1/3)
+  zeromatirx[6,9] <- (-0.1/3)
+  zeromatirx[7,1:6] <- zeromatirx[1:6,7]*-0.2
+  zeromatirx[8,1:7] <- zeromatirx[1:7,8]*-0.2
+  zeromatirx[9,1:8] <- zeromatirx[1:8,9]*-0.2
+  diag(zeromatirx[1:6,1:6])<- -1
+  diag(zeromatirx[7:9,7:9]) <- -0.1
+  return(as.matrix(zeromatirx))
+}
+alpha<-matrixfrom(zeromatirx)
 
 out.E <- law(alpha, N = 10000)
 summary(out.E)
-RT.E <- -1/(out.E[["DomEig"]]) ####transfer to eigenvalue to time
+RT.E <- -1/(out.E[["DomEig"]]) 
 summary(RT.E)
 
-
-  
-
-
 ## simulation2 
-
-
-muu <- c(1,1,1,1,1,1,-0.001,-0.001,-0.001,-0.0001)
 law <- function(alpha, N=1, omni.i=NA, omni.j=NA, omega=NULL){
   
   a<-NULL
@@ -423,13 +424,9 @@ return(as.data.frame(out))
 }
 
 
-
-alpha <- scan('6_3_1.txt')
-alpha <- matrix(alpha[1:100], ncol = 10, byrow = TRUE)
-
 out.E <- law(alpha, N = 10000)
 summary(out.E)
-RT.E<- -1/(out.E[["DomEig"]]) ####transfer to eigenvalue to time
+RT.E<- -1/(out.E[["DomEig"]]) 
 summary(RT.E)
 
 
