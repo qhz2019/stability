@@ -189,27 +189,8 @@ law <- function(alpha, N=1, omni.i=NA, omni.j=NA, omega=NULL){
 
 kk<-read.csv("kk.csv")  
 hist(kk[,1]) # check uniform distribution
-
-zeromatirx <- matrix(0, nrow=9, ncol=9)
-matrixfrom<-function (zeromatirx) {
-  zeromatirx[1:6,1:6] <- -0.5
-  zeromatirx[1,7] <- -0.1
-  zeromatirx[2,7] <- (-0.5+0.1)
-  zeromatirx[2,8] <- (-0.5+0.1)
-  zeromatirx[3,8] <- -0.1
-  zeromatirx[2,9] <- (-0.5+0.1)
-  zeromatirx[4,9] <- (-0.1/3)
-  zeromatirx[5,9] <- (-0.1/3)
-  zeromatirx[6,9] <- (-0.1/3)
-  zeromatirx[7,1:6] <- zeromatirx[1:6,7]*-0.2
-  zeromatirx[8,1:7] <- zeromatirx[1:7,8]*-0.2
-  zeromatirx[9,1:8] <- zeromatirx[1:8,9]*-0.2
-  diag(zeromatirx[1:6,1:6])<- -1
-  diag(zeromatirx[7:9,7:9]) <- -0.1
-  return(as.matrix(zeromatirx))
-}
-alpha<-matrixfrom(zeromatirx)
-
+alpha <- scan('6_3_1.txt')
+alpha <- matrix(alpha[1:100], ncol = 10, byrow = TRUE)
 out.E <- law(alpha, N = 10000)
 summary(out.E)
 RT.E <- -1/(out.E[["DomEig"]]) 
