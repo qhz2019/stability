@@ -189,8 +189,8 @@ law <- function(alpha, N=1, omni.i=NA, omni.j=NA, omega=NULL){
 
 kk<-read.csv("kk.csv")  
 hist(kk[,1]) # check uniform distribution
-alpha <- scan('6_3_1.txt')
-alpha <- matrix(alpha[1:100], ncol = 10, byrow = TRUE)
+alpha <- scan('6_3.txt')
+alpha <- matrix(alpha[1:81], ncol = 9, byrow = TRUE) 
 out.E <- law(alpha, N = 10000)
 summary(out.E)
 RT.E <- -1/(out.E[["DomEig"]]) 
