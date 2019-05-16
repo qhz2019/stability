@@ -3,7 +3,6 @@ library(Matrix)
 
 ## simulation 1
 law <- function(alpha, N=1, omni.i=NA, omni.j=NA, omega=NULL){
-  muu <- c(1,1,1,1,1,1,-0.001,-0.001,-0.001)
   a<-NULL
   b<-NULL
   out.a <- NULL
