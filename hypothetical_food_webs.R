@@ -191,11 +191,9 @@ law <- function(alpha, N=1, omni.i=NA, omni.j=NA, omega=NULL){
   return(as.data.frame(out))
 }
 
-#alpha <- scan('matrix1.txt')
-#save(alpha, file = paste('matrix1','.RData',sep = ""))
+
 rm(alpha)
 load('matrix1.RData')
-
 alpha <- matrix(alpha[1:81], ncol = 9, byrow = TRUE)
 
 out.E <- law(alpha, N = 10000)
@@ -420,12 +418,9 @@ law <- function(alpha, N=1, omni.i=NA, omni.j=NA, omega=NULL){
 return(as.data.frame(out))
 }
 
-#alpha <- scan('matrix2.txt')
-#save(alpha, file = paste('matrix2','.RData',sep = ""))
+
 rm(alpha)
 load('matrix2.RData')
-
-
 alpha <- matrix(alpha[1:100], ncol = 10, byrow = TRUE)
 
 out.E <- law(alpha, N = 10000)
@@ -684,12 +679,8 @@ law <- function(alpha, N=1, omni.i=NA, omni.j=NA, omega=NULL){
 }
 
 
-#alpha <- scan('matrix3.txt')
-#save(alpha, file = paste('matrix3','.RData',sep = ""))
 rm(alpha)
 load('matrix3.RData')
-
-
 alpha <- matrix(alpha[1:121], ncol = 11, byrow = TRUE)
 
 out.E <- law(alpha, N = 10000)
